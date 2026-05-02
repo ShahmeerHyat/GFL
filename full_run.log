@@ -1,0 +1,49 @@
+======================================================================
+LOADING DATA
+======================================================================
+Loading 8 CSV file(s) from C:\CN\PROJECT2\CICIDS...
+  Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv                 225745 rows
+  Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv             286467 rows
+  Friday-WorkingHours-Morning.pcap_ISCX.csv                        191033 rows
+  Monday-WorkingHours.pcap_ISCX.csv                                529918 rows
+  Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv      288602 rows
+  Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv           170366 rows
+  Tuesday-WorkingHours.pcap_ISCX.csv                               445909 rows
+  Wednesday-workingHours.pcap_ISCX.csv                             692703 rows
+Concatenated: 2830743 rows, 79 columns
+Dropped 2867 rows with inf/NaN values; 2827876 remain.
+Dropped 307078 duplicate rows; 2520798 remain.
+
+Final: 2520798 samples, 78 features, 15 classes
+Class distribution (sorted by frequency):
+  BENIGN                                 2095057
+  DoS Hulk                                172846
+  DDoS                                    128014
+  PortScan                                 90694
+  DoS GoldenEye                            10286
+  FTP-Patator                               5931
+  DoS slowloris                             5385
+  DoS Slowhttptest                          5228
+  SSH-Patator                               3219
+  Bot                                       1948
+  Web Attack ï¿½ Brute Force                1470
+  Web Attack ï¿½ XSS                         652
+  Infiltration                                36
+  Web Attack ï¿½ Sql Injection                21
+  Heartbleed                                  11
+
+Minority classes (< 1000 samples): ['Heartbleed', 'Infiltration', 'Web Attack ï¿½ Sql Injection', 'Web Attack ï¿½ XSS']
+
+======================================================================
+PREPROCESSING + SPLIT
+======================================================================
+Split sizes: train=1764558  val=252080  test=504160
+Minority class indices after split: [8, 9, 13, 14]
+
+Device: cuda
+
+======================================================================
+EXPERIMENT GRID: 6 losses × 4 noise rates × 3 seeds = 72 runs
+======================================================================
+
+--- noise_rate = 0.0 (clean labels) ---

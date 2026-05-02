@@ -1,0 +1,121 @@
+======================================================================
+LOADING DATA
+======================================================================
+Loading 8 CSV file(s) from /mnt/c/CN/PROJECT2/CICIDS...
+  Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv                 225745 rows
+  Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv             286467 rows
+  Friday-WorkingHours-Morning.pcap_ISCX.csv                        191033 rows
+  Monday-WorkingHours.pcap_ISCX.csv                                529918 rows
+  Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv      288602 rows
+  Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv           170366 rows
+  Tuesday-WorkingHours.pcap_ISCX.csv                               445909 rows
+  Wednesday-workingHours.pcap_ISCX.csv                             692703 rows
+Concatenated: 2830743 rows, 79 columns
+Dropped 2867 rows with inf/NaN values; 2827876 remain.
+Dropped 307078 duplicate rows; 2520798 remain.
+
+Subsampling BENIGN: 2095057 -> 200000 (all attack rows kept).
+After BENIGN subsample: 625741 rows total.
+
+Final: 625741 samples, 78 features, 15 classes
+Class distribution (sorted by frequency):
+  BENIGN                                  200000
+  DoS Hulk                                172846
+  DDoS                                    128014
+  PortScan                                 90694
+  DoS GoldenEye                            10286
+  FTP-Patator                               5931
+  DoS slowloris                             5385
+  DoS Slowhttptest                          5228
+  SSH-Patator                               3219
+  Bot                                       1948
+  Web Attack ï¿½ Brute Force                1470
+  Web Attack ï¿½ XSS                         652
+  Infiltration                                36
+  Web Attack ï¿½ Sql Injection                21
+  Heartbleed                                  11
+
+======================================================================
+PREPROCESSING + SPLIT
+======================================================================
+Split sizes: train=438018  val=62574  test=125149
+
+Minority classes (< 5000 samples in train, BENIGN excluded):
+  [ 1] Bot                                 n_train=1363
+  [ 5] DoS Slowhttptest                    n_train=3659
+  [ 6] DoS slowloris                       n_train=3769
+  [ 7] FTP-Patator                         n_train=4152
+  [ 8] Heartbleed                          n_train=8
+  [ 9] Infiltration                        n_train=25
+  [11] SSH-Patator                         n_train=2253
+  [12] Web Attack ï¿½ Brute Force          n_train=1029
+  [13] Web Attack ï¿½ Sql Injection        n_train=15
+  [14] Web Attack ï¿½ XSS                  n_train=457
+
+BENIGN class index: 0  (n_train=140000)
+
+Device: cuda
+
+======================================================================
+TAU-SWEEP GRID: 8 configs x 2 noise rates x 1 seeds = 16 runs
+Tau values: [0.0, 1.0, 5.0]
+Noise mode: benign_to_minority
+======================================================================
+
+--- noise_rate = 0.0 (clean labels) ---
+  noise= 0.0  loss=ce              seed=0  macro_f1=0.6547  weighted_f1=0.9771  (13.2s)
+  noise= 0.0  loss=fl              seed=0  macro_f1=0.6695  weighted_f1=0.9763  (4.9s)
+  noise= 0.0  loss=gfl_tau0.0      seed=0  macro_f1=0.6695  weighted_f1=0.9763  (4.6s)
+  noise= 0.0  loss=gfl_tau1.0      seed=0  macro_f1=0.6545  weighted_f1=0.9772  (5.0s)
+  noise= 0.0  loss=gfl_tau5.0      seed=0  macro_f1=0.6714  weighted_f1=0.9773  (4.9s)
+  noise= 0.0  loss=gfl_q_tau0.0    seed=0  macro_f1=0.6184  weighted_f1=0.9749  (5.1s)
+  noise= 0.0  loss=gfl_q_tau1.0    seed=0  macro_f1=0.6173  weighted_f1=0.9746  (6.3s)
+  noise= 0.0  loss=gfl_q_tau5.0    seed=0  macro_f1=0.5126  weighted_f1=0.9650  (5.7s)
+
+--- noise_rate = 0.2 ---
+  noise_rate 0.2 (BENIGN->minority): flipped 28000 of 140000 BENIGN labels into 10 minority classes.
+  noise= 0.2  loss=ce              seed=0  macro_f1=0.6159  weighted_f1=0.9735  (5.3s)
+  noise= 0.2  loss=fl              seed=0  macro_f1=0.6301  weighted_f1=0.9740  (4.4s)
+  noise= 0.2  loss=gfl_tau0.0      seed=0  macro_f1=0.6301  weighted_f1=0.9740  (4.7s)
+  noise= 0.2  loss=gfl_tau1.0      seed=0  macro_f1=0.6321  weighted_f1=0.9735  (4.6s)
+  noise= 0.2  loss=gfl_tau5.0      seed=0  macro_f1=0.6146  weighted_f1=0.9740  (4.6s)
+  noise= 0.2  loss=gfl_q_tau0.0    seed=0  macro_f1=0.6186  weighted_f1=0.9744  (4.4s)
+  noise= 0.2  loss=gfl_q_tau1.0    seed=0  macro_f1=0.6177  weighted_f1=0.9745  (4.3s)
+  noise= 0.2  loss=gfl_q_tau5.0    seed=0  macro_f1=0.6160  weighted_f1=0.9743  (4.7s)
+
+Results saved to /mnt/c/CN/PROJECT2/out_tau_smoke/results.json
+
+======================================================================
+TAU SWEEP: minority-F1 mean as function of tau
+======================================================================
+
+--- noise_rate = 0.0 ---
+  ce          minority_F1 = 0.4913  (macro=0.6547)
+  fl          minority_F1 = 0.5132  (macro=0.6695)
+  loss        tau= 0.00  tau= 1.00  tau= 5.00
+  gfl          0.5132   0.4904   0.5155
+  gfl_q        0.4365   0.4349   0.2790
+
+--- noise_rate = 0.2 ---
+  ce          minority_F1 = 0.4341  (macro=0.6159)
+  fl          minority_F1 = 0.4545  (macro=0.6301)
+  loss        tau= 0.00  tau= 1.00  tau= 5.00
+  gfl          0.4545   0.4584   0.4309
+  gfl_q        0.4370   0.4355   0.4330
+
+======================================================================
+THEORY CHECK: GFL minority-F1 vs tau at noise=0.20
+======================================================================
+
+Theorem 8.2 prediction: minority-F1 rises with tau via (1+tau)^-2 attenuation.
+Observed:
+
+  gfl:
+    tau= 0.00  minority_F1=0.4545  (theoretical (1+tau)^-2 = 1.0000)
+    tau= 1.00  minority_F1=0.4584  (theoretical (1+tau)^-2 = 0.2500)
+    tau= 5.00  minority_F1=0.4309  (theoretical (1+tau)^-2 = 0.0278)
+
+  gfl_q:
+    tau= 0.00  minority_F1=0.4370  (theoretical (1+tau)^-2 = 1.0000)
+    tau= 1.00  minority_F1=0.4355  (theoretical (1+tau)^-2 = 0.2500)
+    tau= 5.00  minority_F1=0.4330  (theoretical (1+tau)^-2 = 0.0278)

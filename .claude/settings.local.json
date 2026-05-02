@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Process *)",
+      "Bash(python experiment.py --data_dir \"C:\\\\CN\\\\PROJECT2\\\\CICIDS\" --epochs 15 --n_seeds 3 --noise_rates 0.0,0.05,0.10,0.20 --out_dir ./out_full)",
+      "PowerShell(Start-Process python -ArgumentList \"experiment.py --data_dir C:\\\\CN\\\\PROJECT2\\\\CICIDS --epochs 15 --n_seeds 3 --noise_rates 0.0,0.05,0.10,0.20 --out_dir ./out_full\" -WorkingDirectory \"C:\\\\CN\\\\PROJECT2\" -RedirectStandardOutput \"C:\\\\CN\\\\PROJECT2\\\\full_run.log\" -RedirectStandardError \"C:\\\\CN\\\\PROJECT2\\\\full_run_err.log\" -WindowStyle Hidden -PassThru | Select-Object Id, Name, StartTime)",
+      "PowerShell(Stop-Process *)",
+      "Bash(python *)",
+      "Bash(nvidia-smi *)",
+      "Bash(ps -W)",
+      "PowerShell(Remove-Item *)",
+      "Bash(pip3 install:*)",
+      "Bash(python3 experiment.py \\\\\n  --data_dir /mnt/c/CN/PROJECT2/CICIDS \\\\\n  --epochs 15 --n_seeds 3 \\\\\n  --noise_rates 0.0,0.05,0.10,0.20 \\\\\n  --out_dir /mnt/c/CN/PROJECT2/out_full 2>&1)"
+    ]
+  }
+}

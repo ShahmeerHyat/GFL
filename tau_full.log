@@ -1,0 +1,195 @@
+======================================================================
+LOADING DATA
+======================================================================
+Loading 8 CSV file(s) from /mnt/c/CN/PROJECT2/CICIDS...
+  Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv                 225745 rows
+  Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv             286467 rows
+  Friday-WorkingHours-Morning.pcap_ISCX.csv                        191033 rows
+  Monday-WorkingHours.pcap_ISCX.csv                                529918 rows
+  Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv      288602 rows
+  Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv           170366 rows
+  Tuesday-WorkingHours.pcap_ISCX.csv                               445909 rows
+  Wednesday-workingHours.pcap_ISCX.csv                             692703 rows
+Concatenated: 2830743 rows, 79 columns
+Dropped 2867 rows with inf/NaN values; 2827876 remain.
+Dropped 307078 duplicate rows; 2520798 remain.
+
+Subsampling BENIGN: 2095057 -> 300000 (all attack rows kept).
+After BENIGN subsample: 725741 rows total.
+
+Final: 725741 samples, 78 features, 15 classes
+Class distribution (sorted by frequency):
+  BENIGN                                  300000
+  DoS Hulk                                172846
+  DDoS                                    128014
+  PortScan                                 90694
+  DoS GoldenEye                            10286
+  FTP-Patator                               5931
+  DoS slowloris                             5385
+  DoS Slowhttptest                          5228
+  SSH-Patator                               3219
+  Bot                                       1948
+  Web Attack ï¿½ Brute Force                1470
+  Web Attack ï¿½ XSS                         652
+  Infiltration                                36
+  Web Attack ï¿½ Sql Injection                21
+  Heartbleed                                  11
+
+======================================================================
+PREPROCESSING + SPLIT
+======================================================================
+Split sizes: train=508018  val=72574  test=145149
+
+Minority classes (< 5000 samples in train, BENIGN excluded):
+  [ 1] Bot                                 n_train=1363
+  [ 5] DoS Slowhttptest                    n_train=3659
+  [ 6] DoS slowloris                       n_train=3770
+  [ 7] FTP-Patator                         n_train=4152
+  [ 8] Heartbleed                          n_train=8
+  [ 9] Infiltration                        n_train=25
+  [11] SSH-Patator                         n_train=2253
+  [12] Web Attack ï¿½ Brute Force          n_train=1029
+  [13] Web Attack ï¿½ Sql Injection        n_train=15
+  [14] Web Attack ï¿½ XSS                  n_train=456
+
+BENIGN class index: 0  (n_train=210000)
+
+Device: cuda
+
+======================================================================
+TAU-SWEEP GRID: 14 configs x 2 noise rates x 3 seeds = 84 runs
+Tau values: [0.0, 0.3, 0.7, 1.0, 1.5, 2.0]
+Noise mode: benign_to_minority
+======================================================================
+
+--- noise_rate = 0.0 (clean labels) ---
+  noise= 0.0  loss=ce              seed=0  macro_f1=0.7023  weighted_f1=0.9820  (25.9s)
+  noise= 0.0  loss=ce              seed=1  macro_f1=0.7077  weighted_f1=0.9822  (16.5s)
+  noise= 0.0  loss=ce              seed=2  macro_f1=0.7071  weighted_f1=0.9826  (21.7s)
+  noise= 0.0  loss=fl              seed=0  macro_f1=0.7752  weighted_f1=0.9809  (28.2s)
+  noise= 0.0  loss=fl              seed=1  macro_f1=0.7747  weighted_f1=0.9800  (27.7s)
+  noise= 0.0  loss=fl              seed=2  macro_f1=0.7744  weighted_f1=0.9815  (28.7s)
+  noise= 0.0  loss=gfl_tau0.0      seed=0  macro_f1=0.7752  weighted_f1=0.9809  (29.0s)
+  noise= 0.0  loss=gfl_tau0.0      seed=1  macro_f1=0.7747  weighted_f1=0.9800  (31.2s)
+  noise= 0.0  loss=gfl_tau0.0      seed=2  macro_f1=0.7744  weighted_f1=0.9815  (25.9s)
+  noise= 0.0  loss=gfl_tau0.3      seed=0  macro_f1=0.7794  weighted_f1=0.9813  (20.3s)
+  noise= 0.0  loss=gfl_tau0.3      seed=1  macro_f1=0.7718  weighted_f1=0.9812  (19.1s)
+  noise= 0.0  loss=gfl_tau0.3      seed=2  macro_f1=0.7745  weighted_f1=0.9817  (19.3s)
+  noise= 0.0  loss=gfl_tau0.7      seed=0  macro_f1=0.7738  weighted_f1=0.9804  (18.7s)
+  noise= 0.0  loss=gfl_tau0.7      seed=1  macro_f1=0.7749  weighted_f1=0.9804  (19.5s)
+  noise= 0.0  loss=gfl_tau0.7      seed=2  macro_f1=0.7739  weighted_f1=0.9815  (19.2s)
+  noise= 0.0  loss=gfl_tau1.0      seed=0  macro_f1=0.7744  weighted_f1=0.9805  (18.7s)
+  noise= 0.0  loss=gfl_tau1.0      seed=1  macro_f1=0.7745  weighted_f1=0.9805  (19.0s)
+  noise= 0.0  loss=gfl_tau1.0      seed=2  macro_f1=0.7702  weighted_f1=0.9813  (18.5s)
+  noise= 0.0  loss=gfl_tau1.5      seed=0  macro_f1=0.7753  weighted_f1=0.9821  (19.3s)
+  noise= 0.0  loss=gfl_tau1.5      seed=1  macro_f1=0.7721  weighted_f1=0.9811  (19.4s)
+  noise= 0.0  loss=gfl_tau1.5      seed=2  macro_f1=0.7705  weighted_f1=0.9817  (18.9s)
+  noise= 0.0  loss=gfl_tau2.0      seed=0  macro_f1=0.7754  weighted_f1=0.9823  (20.6s)
+  noise= 0.0  loss=gfl_tau2.0      seed=1  macro_f1=0.7746  weighted_f1=0.9818  (20.5s)
+  noise= 0.0  loss=gfl_tau2.0      seed=2  macro_f1=0.7708  weighted_f1=0.9819  (18.9s)
+  noise= 0.0  loss=gfl_q_tau0.0    seed=0  macro_f1=0.6223  weighted_f1=0.9762  (17.1s)
+  noise= 0.0  loss=gfl_q_tau0.0    seed=1  macro_f1=0.6233  weighted_f1=0.9750  (17.4s)
+  noise= 0.0  loss=gfl_q_tau0.0    seed=2  macro_f1=0.6276  weighted_f1=0.9719  (17.9s)
+  noise= 0.0  loss=gfl_q_tau0.3    seed=0  macro_f1=0.6217  weighted_f1=0.9759  (17.0s)
+  noise= 0.0  loss=gfl_q_tau0.3    seed=1  macro_f1=0.6277  weighted_f1=0.9704  (17.5s)
+  noise= 0.0  loss=gfl_q_tau0.3    seed=2  macro_f1=0.6237  weighted_f1=0.9776  (17.3s)
+  noise= 0.0  loss=gfl_q_tau0.7    seed=0  macro_f1=0.6223  weighted_f1=0.9762  (16.8s)
+  noise= 0.0  loss=gfl_q_tau0.7    seed=1  macro_f1=0.6244  weighted_f1=0.9769  (17.4s)
+  noise= 0.0  loss=gfl_q_tau0.7    seed=2  macro_f1=0.6235  weighted_f1=0.9784  (17.7s)
+  noise= 0.0  loss=gfl_q_tau1.0    seed=0  macro_f1=0.6215  weighted_f1=0.9748  (16.7s)
+  noise= 0.0  loss=gfl_q_tau1.0    seed=1  macro_f1=0.6244  weighted_f1=0.9792  (17.4s)
+  noise= 0.0  loss=gfl_q_tau1.0    seed=2  macro_f1=0.6235  weighted_f1=0.9763  (17.5s)
+  noise= 0.0  loss=gfl_q_tau1.5    seed=0  macro_f1=0.6225  weighted_f1=0.9759  (17.0s)
+  noise= 0.0  loss=gfl_q_tau1.5    seed=1  macro_f1=0.6241  weighted_f1=0.9756  (18.2s)
+  noise= 0.0  loss=gfl_q_tau1.5    seed=2  macro_f1=0.6224  weighted_f1=0.9766  (17.3s)
+  noise= 0.0  loss=gfl_q_tau2.0    seed=0  macro_f1=0.6222  weighted_f1=0.9707  (18.1s)
+  noise= 0.0  loss=gfl_q_tau2.0    seed=1  macro_f1=0.6243  weighted_f1=0.9779  (17.9s)
+  noise= 0.0  loss=gfl_q_tau2.0    seed=2  macro_f1=0.6230  weighted_f1=0.9781  (16.6s)
+
+--- noise_rate = 0.2 ---
+  noise_rate 0.2 (BENIGN->minority): flipped 42000 of 210000 BENIGN labels into 10 minority classes.
+  noise= 0.2  loss=ce              seed=0  macro_f1=0.7048  weighted_f1=0.9804  (17.5s)
+  noise= 0.2  loss=ce              seed=1  macro_f1=0.7039  weighted_f1=0.9801  (17.5s)
+  noise= 0.2  loss=ce              seed=2  macro_f1=0.7036  weighted_f1=0.9822  (16.6s)
+  noise= 0.2  loss=fl              seed=0  macro_f1=0.7034  weighted_f1=0.9791  (19.0s)
+  noise= 0.2  loss=fl              seed=1  macro_f1=0.7037  weighted_f1=0.9796  (18.9s)
+  noise= 0.2  loss=fl              seed=2  macro_f1=0.7031  weighted_f1=0.9800  (19.0s)
+  noise= 0.2  loss=gfl_tau0.0      seed=0  macro_f1=0.7034  weighted_f1=0.9791  (19.5s)
+  noise= 0.2  loss=gfl_tau0.0      seed=1  macro_f1=0.7037  weighted_f1=0.9796  (19.0s)
+  noise= 0.2  loss=gfl_tau0.0      seed=2  macro_f1=0.7031  weighted_f1=0.9800  (19.8s)
+  noise= 0.2  loss=gfl_tau0.3      seed=0  macro_f1=0.7035  weighted_f1=0.9795  (20.1s)
+  noise= 0.2  loss=gfl_tau0.3      seed=1  macro_f1=0.7035  weighted_f1=0.9797  (20.7s)
+  noise= 0.2  loss=gfl_tau0.3      seed=2  macro_f1=0.7034  weighted_f1=0.9810  (19.4s)
+  noise= 0.2  loss=gfl_tau0.7      seed=0  macro_f1=0.7037  weighted_f1=0.9796  (19.5s)
+  noise= 0.2  loss=gfl_tau0.7      seed=1  macro_f1=0.7009  weighted_f1=0.9800  (19.2s)
+  noise= 0.2  loss=gfl_tau0.7      seed=2  macro_f1=0.7029  weighted_f1=0.9796  (19.9s)
+  noise= 0.2  loss=gfl_tau1.0      seed=0  macro_f1=0.7030  weighted_f1=0.9805  (19.4s)
+  noise= 0.2  loss=gfl_tau1.0      seed=1  macro_f1=0.7039  weighted_f1=0.9801  (18.8s)
+  noise= 0.2  loss=gfl_tau1.0      seed=2  macro_f1=0.7036  weighted_f1=0.9811  (18.2s)
+  noise= 0.2  loss=gfl_tau1.5      seed=0  macro_f1=0.7005  weighted_f1=0.9799  (19.8s)
+  noise= 0.2  loss=gfl_tau1.5      seed=1  macro_f1=0.7035  weighted_f1=0.9799  (18.8s)
+  noise= 0.2  loss=gfl_tau1.5      seed=2  macro_f1=0.7034  weighted_f1=0.9810  (19.0s)
+  noise= 0.2  loss=gfl_tau2.0      seed=0  macro_f1=0.7037  weighted_f1=0.9799  (20.7s)
+  noise= 0.2  loss=gfl_tau2.0      seed=1  macro_f1=0.7041  weighted_f1=0.9801  (20.3s)
+  noise= 0.2  loss=gfl_tau2.0      seed=2  macro_f1=0.7035  weighted_f1=0.9814  (20.2s)
+  noise= 0.2  loss=gfl_q_tau0.0    seed=0  macro_f1=0.6743  weighted_f1=0.9804  (21.5s)
+  noise= 0.2  loss=gfl_q_tau0.0    seed=1  macro_f1=0.6751  weighted_f1=0.9795  (20.2s)
+  noise= 0.2  loss=gfl_q_tau0.0    seed=2  macro_f1=0.6753  weighted_f1=0.9821  (20.4s)
+  noise= 0.2  loss=gfl_q_tau0.3    seed=0  macro_f1=0.6730  weighted_f1=0.9789  (19.8s)
+  noise= 0.2  loss=gfl_q_tau0.3    seed=1  macro_f1=0.6750  weighted_f1=0.9799  (21.4s)
+  noise= 0.2  loss=gfl_q_tau0.3    seed=2  macro_f1=0.6764  weighted_f1=0.9812  (20.3s)
+  noise= 0.2  loss=gfl_q_tau0.7    seed=0  macro_f1=0.6726  weighted_f1=0.9816  (20.1s)
+  noise= 0.2  loss=gfl_q_tau0.7    seed=1  macro_f1=0.6725  weighted_f1=0.9797  (19.3s)
+  noise= 0.2  loss=gfl_q_tau0.7    seed=2  macro_f1=0.6711  weighted_f1=0.9784  (20.7s)
+  noise= 0.2  loss=gfl_q_tau1.0    seed=0  macro_f1=0.6733  weighted_f1=0.9806  (23.9s)
+  noise= 0.2  loss=gfl_q_tau1.0    seed=1  macro_f1=0.6704  weighted_f1=0.9790  (23.6s)
+  noise= 0.2  loss=gfl_q_tau1.0    seed=2  macro_f1=0.6689  weighted_f1=0.9773  (20.6s)
+  noise= 0.2  loss=gfl_q_tau1.5    seed=0  macro_f1=0.6725  weighted_f1=0.9810  (19.4s)
+  noise= 0.2  loss=gfl_q_tau1.5    seed=1  macro_f1=0.6714  weighted_f1=0.9806  (19.4s)
+  noise= 0.2  loss=gfl_q_tau1.5    seed=2  macro_f1=0.6715  weighted_f1=0.9771  (22.8s)
+  noise= 0.2  loss=gfl_q_tau2.0    seed=0  macro_f1=0.6723  weighted_f1=0.9791  (22.1s)
+  noise= 0.2  loss=gfl_q_tau2.0    seed=1  macro_f1=0.6692  weighted_f1=0.9795  (24.6s)
+  noise= 0.2  loss=gfl_q_tau2.0    seed=2  macro_f1=0.6708  weighted_f1=0.9809  (19.8s)
+
+Results saved to /mnt/c/CN/PROJECT2/out_tau_full/results.json
+
+======================================================================
+TAU SWEEP: minority-F1 mean as function of tau
+======================================================================
+
+--- noise_rate = 0.0 ---
+  ce          minority_F1 = 0.5654  (macro=0.7057)
+  fl          minority_F1 = 0.6695  (macro=0.7748)
+  loss        tau= 0.00  tau= 0.30  tau= 0.70  tau= 1.00  tau= 1.50  tau= 2.00
+  gfl          0.6695   0.6700   0.6687   0.6669   0.6660   0.6673
+  gfl_q        0.4464   0.4456   0.4432   0.4430   0.4432   0.4437
+
+--- noise_rate = 0.2 ---
+  ce          minority_F1 = 0.5633  (macro=0.7041)
+  fl          minority_F1 = 0.5627  (macro=0.7034)
+  loss        tau= 0.00  tau= 0.30  tau= 0.70  tau= 1.00  tau= 1.50  tau= 2.00
+  gfl          0.5627   0.5626   0.5613   0.5626   0.5610   0.5630
+  gfl_q        0.5197   0.5199   0.5158   0.5147   0.5157   0.5140
+
+======================================================================
+THEORY CHECK: GFL minority-F1 vs tau at noise=0.20
+======================================================================
+
+Theorem 8.2 prediction: minority-F1 rises with tau via (1+tau)^-2 attenuation.
+Observed:
+
+  gfl:
+    tau= 0.00  minority_F1=0.5627  (theoretical (1+tau)^-2 = 1.0000)
+    tau= 0.30  minority_F1=0.5626  (theoretical (1+tau)^-2 = 0.5917)
+    tau= 0.70  minority_F1=0.5613  (theoretical (1+tau)^-2 = 0.3460)
+    tau= 1.00  minority_F1=0.5626  (theoretical (1+tau)^-2 = 0.2500)
+    tau= 1.50  minority_F1=0.5610  (theoretical (1+tau)^-2 = 0.1600)
+    tau= 2.00  minority_F1=0.5630  (theoretical (1+tau)^-2 = 0.1111)
+
+  gfl_q:
+    tau= 0.00  minority_F1=0.5197  (theoretical (1+tau)^-2 = 1.0000)
+    tau= 0.30  minority_F1=0.5199  (theoretical (1+tau)^-2 = 0.5917)
+    tau= 0.70  minority_F1=0.5158  (theoretical (1+tau)^-2 = 0.3460)
+    tau= 1.00  minority_F1=0.5147  (theoretical (1+tau)^-2 = 0.2500)
+    tau= 1.50  minority_F1=0.5157  (theoretical (1+tau)^-2 = 0.1600)
+    tau= 2.00  minority_F1=0.5140  (theoretical (1+tau)^-2 = 0.1111)
