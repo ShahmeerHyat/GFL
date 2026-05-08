@@ -1,2 +1,17 @@
+# Data folders (too large for git)
 CICIDS/
+UNSW/
+
+# Output folders
+out_*/
+
+# Logs
+*.log
+
+# Python cache
 __pycache__/
+*.pyc
+*.pyo
+
+# Zip archives
+*.zip
